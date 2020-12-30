@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/background"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:gravity="center_horizontal"
+    >
+
+        <RelativeLayout
+            android:layout_width="170dp"
+            android:layout_height="170dp"
+        >
+            <ImageView
+                android:id="@+id/ivAvatar"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:scaleType="fitXY"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/ic_avatar_default"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+            />
+
+            <ImageView
+                android:id="@+id/ivRing1"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:scaleType="fitXY"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/ic_ring"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+            />
+
+            <ImageView
+                android:id="@+id/ivRing2"
+                android:layout_width="170dp"
+                android:layout_height="170dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_ring"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+            />
+
+            <ProgressBar
+                android:layout_gravity="center"
+                android:id="@+id/progressbar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
+                android:progressDrawable="@drawable/circular_progress_bar" />
+
+            <TextView
+                android:id="@+id/txtTimeout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00:00"
+                android:textColor="#FFFFFF"
+                android:layout_centerHorizontal="true"
+                android:textSize="22sp"
+                android:layout_centerVertical="true"
+                android:scaleType="fitXY" />
+        </RelativeLayout>
+
+        <ListView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/listview"
+            android:scrollbars="vertical"
+            android:layout_height="200dip"
+            android:layout_width="wrap_content"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="0dp"
+    >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="60dp"
+            android:layout_marginEnd="140dp"
+        >
+            <com.incomingcall.AnimateImage
+                android:id="@+id/ivDeclineCall"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_decline_call"
+            />
+            <TextView
+                android:id="@+id/tvDecline"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:textSize="14sp"
+                android:fontFamily="sans-serif"
+                android:textColor="#ADADAD"
+                android:text="@string/decline"
+                android:gravity="center"
+            />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="60dp"
+            android:orientation="vertical">
+
+            <com.incomingcall.AnimateImage
+                android:id="@+id/ivAcceptCall"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_accept_call" />
+
+            <TextView
+                android:id="@+id/tvAccept"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:text="@string/accept"
+                android:textColor="#ADADAD"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+</RelativeLayout>
