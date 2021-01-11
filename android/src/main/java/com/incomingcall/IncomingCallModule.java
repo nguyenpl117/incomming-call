@@ -1,6 +1,10 @@
 package com.incomingcall;
 
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.media.MediaPlayer;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
 import android.os.Parcelable;
@@ -28,7 +32,7 @@ public class IncomingCallModule extends ReactContextBaseJavaModule {
     private static final String TAG = "RNIC:IncomingCallModule";
     private WritableMap headlessExtras;
     private ReadableMap _settings;
-
+    private String sound;
 
     public IncomingCallModule(ReactApplicationContext context) {
         super(context);
@@ -43,7 +47,57 @@ public class IncomingCallModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void configs(ReadableMap data) {
+//        if (mainActivity != null) {
+//            mainActivity.runOnUiThread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    mainActivity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+//                }
+//            });
+//        }
+
         _settings = data;
+        if (_settings.hasKey("sound")) {
+            this.sound = _settings.getString("sound");
+        }
+    }
+
+    @ReactMethod
+    public void setSound(String sound) {
+        this.sound = sound;
+    }
+
+    @ReactMethod
+    public void playSound(String sound) {
+        Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+
+        MediaPlayer player = MediaPlayer.create(IncomingCallModule.reactContext, notification);
+
+        if (sound.equalsIgnoreCase("dial_notification_1.mp3")) {
+            notification = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + IncomingCallModule.reactContext.getPackageName() + "/" + R.raw.notification_1);
+        } else if (sound.equalsIgnoreCase("dial_notification_2.mp3")) {
+            notification = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + IncomingCallModule.reactContext.getPackageName() + "/" + R.raw.notification_2);
+        } else if (sound.equalsIgnoreCase("dial_notification_3.mp3")) {
+            notification = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + IncomingCallModule.reactContext.getPackageName() + "/" + R.raw.notification_3);
+        } else if (sound.equalsIgnoreCase("dial_notification_4.mp3")) {
+            notification = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + IncomingCallModule.reactContext.getPackageName() + "/" + R.raw.notification_4);
+        } else if (sound.equalsIgnoreCase("dial_notification_5.mp3")) {
+            notification = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + IncomingCallModule.reactContext.getPackageName() + "/" + R.raw.notification_5);
+        } else if (sound.equalsIgnoreCase("dial_notification_6.mp3")) {
+            notification = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + IncomingCallModule.reactContext.getPackageName() + "/" + R.raw.notification_6);
+        } else if (sound.equalsIgnoreCase("dial_notification_7.mp3")) {
+            notification = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + IncomingCallModule.reactContext.getPackageName() + "/" + R.raw.notification_7);
+        } else if (sound.equalsIgnoreCase("dial_notification_8.mp3")) {
+            notification = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + IncomingCallModule.reactContext.getPackageName() + "/" + R.raw.notification_8);
+        } else if (sound.equalsIgnoreCase("dial_notification_9.mp3")) {
+            notification = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + IncomingCallModule.reactContext.getPackageName() + "/" + R.raw.notification_9);
+        } else if (sound.equalsIgnoreCase("dial_notification_10.mp3")) {
+            notification = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + IncomingCallModule.reactContext.getPackageName() + "/" + R.raw.notification_10);
+        }
+
+        player = MediaPlayer.create(IncomingCallModule.reactContext, notification);
+
+        player.start();
     }
 
     @ReactMethod
@@ -62,8 +116,8 @@ public class IncomingCallModule extends ReactContextBaseJavaModule {
 //            bundle.putString("info", info);
             UnlockScreenActivity.setAddress(address);
             bundle.putInt("timeout", timeout);
-            if (_settings.hasKey("sound")) {
-                bundle.putString("sound", _settings.getString("sound"));
+            if (this.sound != null) {
+                bundle.putString("sound", this.sound);
             }
 
             i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP);

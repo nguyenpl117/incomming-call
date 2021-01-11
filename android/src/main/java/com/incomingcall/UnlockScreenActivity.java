@@ -81,29 +81,12 @@ public class UnlockScreenActivity extends AppCompatActivity implements UnlockScr
                 WindowManager.LayoutParams.FLAG_ALLOW_LOCK_WHILE_SCREEN_ON);
         setContentView(R.layout.activity_call_incoming);
 
-//        tvName = findViewById(R.id.tvName);
-//        tvInfo = findViewById(R.id.tvInfo);
-//        ivAvatar = findViewById(R.id.ivAvatar);
         mTextField = findViewById(R.id.txtTimeout);
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             if (bundle.containsKey("uuid")) {
                 uuid = bundle.getString("uuid");
-            }
-//            if (bundle.containsKey("name")) {
-//                String name = bundle.getString("name");
-//                tvName.setText(name);
-//            }
-//            if (bundle.containsKey("info")) {
-//                String info = bundle.getString("info");
-//                tvInfo.setText(info);
-//            }
-            if (bundle.containsKey("avatar")) {
-                String avatar = bundle.getString("avatar");
-//                if (avatar != null) {
-//                    Picasso.get().load(avatar).transform(new CircleTransform()).into(ivAvatar);
-//                }
             }
             if (bundle.containsKey("timeout")) {
                 int timeout = bundle.getInt("timeout");
@@ -172,6 +155,9 @@ public class UnlockScreenActivity extends AppCompatActivity implements UnlockScr
 
         if (bundle != null && bundle.containsKey("sound")) {
             String sound = bundle.getString("sound", "");
+            
+            player = MediaPlayer.create(IncomingCallModule.reactContext, notification);
+
             if (sound.equalsIgnoreCase("dial_notification_1.mp3")) {
                 notification = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + getActContext().getPackageName() + "/" + R.raw.notification_1);
             } else if (sound.equalsIgnoreCase("dial_notification_2.mp3")) {
@@ -200,6 +186,7 @@ public class UnlockScreenActivity extends AppCompatActivity implements UnlockScr
                 player.stop();
             }
             player = MediaPlayer.create(IncomingCallModule.reactContext, notification);
+
             player.start();
         } catch (Exception e) {
             e.printStackTrace();
@@ -237,7 +224,11 @@ public class UnlockScreenActivity extends AppCompatActivity implements UnlockScr
 
             public void onFinish() {
                 mTextField.setText("done!");
-                dismissIncoming();
+                v.cancel();
+                if (player.isPlaying()) {
+                    player.stop();
+                }
+                dismissDialing();
             }
         }.start();
     }
