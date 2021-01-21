@@ -47,6 +47,7 @@ public class UnlockScreenActivity extends AppCompatActivity implements UnlockScr
 //    private ImageView ivAvatar;
     private  TextView mTextField;
     private String uuid = "";
+    private String dataRes = "";
     static boolean active = false;
     private static Vibrator v = (Vibrator) IncomingCallModule.reactContext.getSystemService(Context.VIBRATOR_SERVICE);
     private long[] pattern = {0, 1000, 800};
@@ -87,6 +88,9 @@ public class UnlockScreenActivity extends AppCompatActivity implements UnlockScr
         if (bundle != null) {
             if (bundle.containsKey("uuid")) {
                 uuid = bundle.getString("uuid");
+            }
+            if (bundle.containsKey("data")) {
+                dataRes = bundle.getString("data");
             }
             if (bundle.containsKey("timeout")) {
                 int timeout = bundle.getInt("timeout");
@@ -155,7 +159,7 @@ public class UnlockScreenActivity extends AppCompatActivity implements UnlockScr
 
         if (bundle != null && bundle.containsKey("sound")) {
             String sound = bundle.getString("sound", "");
-            
+
             player = MediaPlayer.create(IncomingCallModule.reactContext, notification);
 
             if (sound.equalsIgnoreCase("dial_notification_1.mp3")) {
@@ -255,6 +259,7 @@ public class UnlockScreenActivity extends AppCompatActivity implements UnlockScr
         WritableMap params = Arguments.createMap();
         params.putBoolean("accept", true);
         params.putString("uuid", uuid);
+        params.putString("data", dataRes);
         if (!IncomingCallModule.reactContext.hasCurrentActivity()) {
             params.putBoolean("isHeadless", true);
         }

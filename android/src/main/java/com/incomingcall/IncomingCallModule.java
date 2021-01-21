@@ -5,24 +5,29 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.app.Activity;
-import android.os.Parcelable;
+import android.provider.Settings;
 import android.view.WindowManager;
 import android.content.Context;
 import android.util.Log;
-import java.util.Timer;
-import java.util.TimerTask;
 
+import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
-import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeMap;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.facebook.react.modules.core.DeviceEventManagerModule;
+import com.github.nkzawa.emitter.Emitter;
 
 public class IncomingCallModule extends ReactContextBaseJavaModule {
 
@@ -43,6 +48,21 @@ public class IncomingCallModule extends ReactContextBaseJavaModule {
     @Override
     public String getName() {
         return "IncomingCall";
+    }
+
+    @ReactMethod
+    public void socket(String uri, ReadableMap opt) {
+        SocketService.socket(uri, opt);
+    }
+
+    @ReactMethod
+    public void emit(String name, ReadableMap opt) {
+        SocketService.emit(name, opt);
+    }
+
+    @ReactMethod
+    public void close() {
+        SocketService.close();
     }
 
     @ReactMethod
@@ -101,7 +121,7 @@ public class IncomingCallModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void display(String uuid, ReadableArray address, int timeout) {
+    public void display(String uuid, ReadableArray address, String data, int timeout) {
         if (UnlockScreenActivity.active) {
             return;
         }
@@ -114,6 +134,7 @@ public class IncomingCallModule extends ReactContextBaseJavaModule {
 //            bundle.("name", address);
 //            bundle.putString("avatar", avatar);
 //            bundle.putString("info", info);
+            bundle.putString("data", data);
             UnlockScreenActivity.setAddress(address);
             bundle.putInt("timeout", timeout);
             if (this.sound != null) {
@@ -126,6 +147,7 @@ public class IncomingCallModule extends ReactContextBaseJavaModule {
             WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
 
             i.putExtras(bundle);
+            getReactApplicationContext().getCurrentActivity().startActivityForResult(i, 2323);
             reactContext.startActivity(i);
 
 //            if (timeout > 0) {
@@ -137,6 +159,17 @@ public class IncomingCallModule extends ReactContextBaseJavaModule {
 //                    }
 //                }, timeout);
 //            }
+        }
+    }
+
+    @ReactMethod
+    public void checkPermission() {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q && !Settings.canDrawOverlays(getReactApplicationContext()))
+        {
+            Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                    Uri.parse("package:" + getReactApplicationContext().getPackageName()));
+
+            getReactApplicationContext().getCurrentActivity().startActivityForResult(intent, 2323);
         }
     }
 
