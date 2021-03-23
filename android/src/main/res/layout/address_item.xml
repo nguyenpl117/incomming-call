@@ -1,0 +1,53 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        >
+        <TextView
+            android:id="@+id/addressName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dương gia quán"
+            android:textColor="@color/white"
+            android:textSize="22dp"
+            android:layout_weight="1"
+            android:gravity="bottom"
+            />
+        <TextView
+            android:id="@+id/addressInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Số 1 Phạm Hùng, Mỹ Đình, Bắc Từ Liêm, Hà Nội"
+            android:textColor="@color/white"
+            android:textSize="14dp"
+            android:layout_weight="1"
+            android:gravity="top"
+            />
+    </LinearLayout>
+    <FrameLayout
+        android:id="@+id/line_next_to"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <View
+            android:background="@color/borderColor"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_gravity="center"
+            />
+        <com.incomingcall.AnimateImage
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_line_to" />
+    </FrameLayout>
+</LinearLayout>

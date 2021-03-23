@@ -1,63 +1,242 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@color/background"
+    android:background="#444"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical">
-
     <LinearLayout
+        android:id="@+id/info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Thu nhập của bạn"
+                    android:textColor="@color/white"
+                    android:gravity="center"
+                    android:textSize="22dp"
+                    android:layout_weight="1"
+                    />
+            </LinearLayout>
+            <View android:background="@color/borderColor" android:layout_width="match_parent" android:layout_height="1px"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                >
+                <TextView
+                    android:id="@+id/money"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="30,000đ"
+                    android:textColor="@color/white"
+                    android:gravity="center"
+                    android:textSize="22dp"
+                    android:layout_weight="1"
+                    />
+            </LinearLayout>
+            <View android:background="@color/borderColor" android:layout_width="match_parent" android:layout_height="1px"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                >
+                <TextView
+                    android:id="@+id/service"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SGOBike"
+                    android:textColor="@color/white"
+                    android:gravity="center"
+                    android:textSize="22dp"
+                    android:layout_weight="1"
+                    />
+            </LinearLayout>
+            <View android:background="@color/borderColor" android:layout_width="match_parent" android:layout_height="1px"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                >
+                <TextView
+                    android:id="@+id/distance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="3.6km"
+                    android:textColor="@color/white"
+                    android:gravity="center"
+                    android:textSize="22dp"
+                    android:layout_weight="1"
+                    />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    >
+
+                    <TextView
+                        android:id="@+id/payment_method"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#1A8FF5"
+                        android:gravity="center"
+                        android:paddingTop="3dp"
+                        android:paddingBottom="3dp"
+                        android:paddingLeft="7dp"
+                        android:paddingRight="7dp"
+                        android:text="SGO Pay"
+                        android:textColor="@color/white"
+                        android:textSize="22dp" />
+                </LinearLayout>
+                <TextView
+                    android:id="@+id/gift"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Khuyến mãi"
+                    android:textColor="@color/white"
+                    android:gravity="center"
+                    android:textSize="22dp"
+                    android:layout_weight="1"
+                    />
+            </LinearLayout>
+            <View android:background="@color/borderColor" android:layout_width="match_parent" android:layout_height="1px"/>
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_below="@id/info"
+        android:layout_above="@id/accept"
+        >
+        <ListView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/listview"
+            android:scrollbars="vertical"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="0dp"
+            android:drawSelectorOnTop="false"
+            android:listSelector="@android:color/transparent"
+            />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/accept"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:gravity="center_horizontal"
-    >
-
-        <RelativeLayout
-            android:layout_width="170dp"
-            android:layout_height="170dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginBottom="5dp"
         >
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:orientation="vertical"
+            android:layout_centerVertical="true"
+            >
+            <com.incomingcall.AnimateImage
+                android:id="@+id/ivDeclineCall"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_decline_call"
+                />
+            <TextView
+                android:id="@+id/tvDecline"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:textSize="14sp"
+                android:fontFamily="sans-serif"
+                android:textColor="#ADADAD"
+                android:text="@string/decline"
+                android:gravity="center"
+                />
+        </LinearLayout>
+        <RelativeLayout
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_centerHorizontal="true"
+            >
             <ImageView
                 android:id="@+id/ivAvatar"
-                android:layout_width="130dp"
-                android:layout_height="130dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:scaleType="fitXY"
                 android:layout_marginTop="20dp"
                 android:src="@drawable/ic_avatar_default"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"
-            />
+                />
 
             <ImageView
                 android:id="@+id/ivRing1"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
                 android:scaleType="fitXY"
                 android:layout_marginTop="10dp"
                 android:src="@drawable/ic_ring"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"
-            />
+                />
 
             <ImageView
                 android:id="@+id/ivRing2"
-                android:layout_width="170dp"
-                android:layout_height="170dp"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/ic_ring"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"
-            />
+                />
 
             <ProgressBar
                 android:layout_gravity="center"
                 android:id="@+id/progressbar"
                 style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="130dp"
-                android:layout_height="130dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_centerInParent="true"
                 android:layout_centerHorizontal="true"
                 android:progressDrawable="@drawable/circular_progress_bar" />
@@ -73,68 +252,19 @@
                 android:layout_centerVertical="true"
                 android:scaleType="fitXY" />
         </RelativeLayout>
-
-        <ListView xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/listview"
-            android:scrollbars="vertical"
-            android:layout_height="200dip"
-            android:layout_width="wrap_content"
-            />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="0dp"
-    >
-
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
             android:orientation="vertical"
-            android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:layout_marginBottom="60dp"
-            android:layout_marginEnd="140dp"
-        >
-            <com.incomingcall.AnimateImage
-                android:id="@+id/ivDeclineCall"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:scaleType="centerInside"
-                android:src="@drawable/ic_decline_call"
-            />
-            <TextView
-                android:id="@+id/tvDecline"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
-                android:textSize="14sp"
-                android:fontFamily="sans-serif"
-                android:textColor="#ADADAD"
-                android:text="@string/decline"
-                android:gravity="center"
-            />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:layout_marginBottom="60dp"
-            android:orientation="vertical">
-
+            >
             <com.incomingcall.AnimateImage
                 android:id="@+id/ivAcceptCall"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:scaleType="centerInside"
                 android:src="@drawable/ic_accept_call" />
-
             <TextView
                 android:id="@+id/tvAccept"
                 android:layout_width="match_parent"
@@ -146,6 +276,5 @@
                 android:textColor="#ADADAD"
                 android:textSize="14sp" />
         </LinearLayout>
-
-    </LinearLayout>
+    </RelativeLayout>
 </RelativeLayout>

@@ -38,6 +38,9 @@ import android.media.RingtoneManager;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 public class UnlockScreenActivity extends AppCompatActivity implements UnlockScreenActivityInterface {
 
@@ -96,6 +99,28 @@ public class UnlockScreenActivity extends AppCompatActivity implements UnlockScr
                 int timeout = bundle.getInt("timeout");
                 startTimer(timeout);
             }
+        }
+
+        try {
+            JSONObject mainObject = new JSONObject(dataRes);
+            JSONObject info = mainObject.getJSONObject("info");
+            TextView MoneyTextView = findViewById(R.id.money);
+            TextView ServiceTextView = findViewById(R.id.service);
+            TextView DistanceTextView = findViewById(R.id.distance);
+            TextView PaymentMethodTextView = findViewById(R.id.payment_method);
+            TextView GiftTextView = findViewById(R.id.gift);
+
+            MoneyTextView.setText(info.getString("price"));
+            ServiceTextView.setText(info.getString("service"));
+            DistanceTextView.setText(info.getString("distance"));
+            PaymentMethodTextView.setText(info.getString("payment_method"));
+            if (info.isNull("gift")) {
+                GiftTextView.setVisibility(View.GONE);
+            } else {
+                GiftTextView.setText(info.getString("gift"));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
 
         final ListView listview = (ListView) findViewById(R.id.listview);
